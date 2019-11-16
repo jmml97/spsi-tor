@@ -1,0 +1,177 @@
+\documentclass[
+  a4paper,
+  12pt,
+  spanish,
+]{scrartcl}
+
+% Párrafos
+\setlength{\parindent}{18pt}
+
+%-------------------------------------------------------------------------------
+%	PAQUETES
+%-------------------------------------------------------------------------------
+
+% Idioma
+
+\usepackage[es-noindentfirst]{babel}
+
+% Matemáticas
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+% Fuentes personalizadas para utilizar con XeLaTeX o LuaLaTeX
+
+\usepackage[no-math]{fontspec}
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+\setmonofont{Libertinus Mono}
+
+\usepackage[math-style=TeX]{unicode-math}
+\setmathfont{Libertinus Math}
+
+% Configuración de microtype
+
+\defaultfontfeatures{Ligatures=TeX,Numbers=Lining}
+\usepackage[activate={true,nocompatibility},final,tracking=true,factor=1100,stretch=10,shrink=10]{microtype}
+\SetTracking{encoding={*}, shape=sc}{0}
+
+% Enlaces y colores
+
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{webgreen}{rgb}{0,0.5,0}
+\hypersetup{
+  colorlinks=true,
+  citecolor=webgreen,
+}
+
+% Otros elementos de página
+
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=*, itemsep=0pt}
+\setlist[itemize]{leftmargin=*, itemsep=0pt}
+
+\usepackage[labelfont=sc]{caption}
+
+% Tikz
+
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\usepackage{float}
+
+% Código
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\footnotesize\ttfamily,%
+	breaklines=true,%
+	captionpos=b,                    % sets the caption-position to bottom
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  frame=lines,
+  numbers=left,
+  stepnumber=1,
+  aboveskip=12pt,
+  showstringspaces=false,
+}
+\renewcommand{\lstlistingname}{Listado}
+
+% Bibliografía
+
+\usepackage[sorting=none, style=apa, isbn=true]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% Lorem ipsum
+
+\usepackage{blindtext}
+
+% Márgenes
+\usepackage[bottom=3.125cm, top=2.5cm, left=4.5cm, right=4.5cm, marginparwidth=70pt]{geometry}
+
+% Fuentes
+
+\usepackage{textcase}
+
+\newfontfamily{\sacshape}{Libertinus Serif}[
+  WordSpace={1.8},
+  LetterSpace={18.0}
+]
+
+\newfontfamily{\slscshape}{Libertinus Serif}[
+  WordSpace={1.8},
+  LetterSpace={6.0}
+]
+
+\DeclareRobustCommand{\spacedallcaps}[1]{{\linespread{1.3}\sacshape\MakeTextUppercase{#1}}}% WordSpace=1.8
+\DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\slscshape\MakeTextLowercase{#1}}}% WordSpace=1.8
+
+% Cabeceras de sección
+
+\RedeclareSectionCommands[beforeskip=-3ex,
+afterskip=2ex]{section,subsection,subsubsection}
+%\addtokomafont{section}{\normalfont\large\spacedallcaps}
+%\setkomafont{section}{\normalfont\large\scshape}
+\RedeclareSectionCommand[beforeskip=-9ex, font=\normalfont\large\scshape, tocentryformat=\normalfont\scshape]{section}
+\addtokomafont{subsection}{\normalfont\normalsize\itshape}
+\RedeclareSectionCommand[beforeskip=-6ex,tocentryformat=\normalfont\itshape]{subsection}
+\addtokomafont{subsubsection}{\normalfont}
+\RedeclareSectionCommand[beforeskip=-4ex]{subsubsection}
+\addtokomafont{paragraph}{\normalfont\itshape}
+%-------------------------------------------------------------------------------
+%	TÍTULO
+%-------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+%-------------------------------------------------------------------------------
+%	CONTENIDO
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{titlepage}
+  \vspace*{4cm}
+
+  \begin{flushleft}
+    \Huge
+    \spacedallcaps{Red Tor}
+    \horrule{2pt}
+  \end{flushleft}
+
+  \vspace{2em}
+
+  \begin{flushright}
+    \large
+    José María Martín Luque\\
+    Antonio Martín Ruiz\\
+    Daniel Pozo Escalona\vspace{1em}
+  
+    \textit{Seguridad y Protección de Sistemas Informáticos}
+  
+    Grado en Ingeniería Informática
+  
+    \textsc{Universidad de Granada}\vspace{1em}
+  
+    \today\vspace{.5em}
+  \end{flushright}
+\end{titlepage}
+
+\newpage
+
+{\hypersetup{hidelinks}
+\tableofcontents
+}
+
+\newpage
+
+\section{Introducción}
+
+%-------------------------------------------------------------------------------
+%	BIBLIOGRAFÍA
+%-------------------------------------------------------------------------------
+
+\newpage
+\printbibliography
+
+\end{document}
