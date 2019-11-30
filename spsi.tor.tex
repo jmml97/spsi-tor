@@ -214,9 +214,8 @@ Como función \textit{hash}, se utiliza SHA-1 por defecto, aunque también se ut
 
 La especificación de Tor describe los parámetros que se utilizan por defecto cuando se usa alguno de los algoritmos de cifrado descritos anteriormente, a saber: \begin{itemize}
   \item Para Diffie-Hellman sobre \(Z_p\) se utiliza como generador \(g=2\) y \(p\) es el primo seguro de 1024 bits descrito en \parencite{carrel_internet_1998}, cuyo valor es \[
-    2^{1024} - 2^{960} - 1 + 2^{64} \cdot \left( (2^{894} \pi) + 129093 \right).
+    2^{1024} - 2^{960} - 1 + 2^{64} \cdot \left\lfloor (2^{894} \pi) + 129093 \right\rfloor.
   \] 
-  % FIXME: pi??????????????'
   %y cuya representación hexadecimal se describe en la figura \ref{verb:primo-seguro}.
   % \begin{figure}[h]
   %   \centering
