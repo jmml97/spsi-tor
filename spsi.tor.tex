@@ -25,6 +25,7 @@
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{mathtools}
 \usepackage{commath}
+\usepackage{xfrac}
 
 % Fuentes personalizadas para utilizar con XeLaTeX o LuaLaTeX
 
@@ -289,27 +290,29 @@ La especificación de Tor describe los parámetros que se utilizan por defecto c
 \section{Posibles ataques}
 \label{sec:ataques}
 % Dani
-
-\subsection{Modelo de amenazas}
-
+A continuación vamos a comentar brevemente algunas de las posibles vías de ataque que presenta Tor.
 Los modelos de amenazas más empleados en redes de anonimato son el del atacante \emph{pasivo},
 que puede observar el tráfico que llega a varios, o todos los nodos de la red; y el del
 atacante \emph{activo}, que además puede participar en la red.
 
-El objetivo de este atacante será romper el anonimato de la red, es decir, determinar las conexiones
+El objetivo de un atacante será romper el anonimato de la red, es decir, determinar las conexiones
 que se producen a través de ella.
 
 El modelo de amenazas de Tor, en concreto, contempla atacantes que pueden observar una parte del tráfico
-de la red --pero no todo--; que puede generar, modificar y retrasar tráfico, y participar en la red
-operando nodos, o controlando nodos de confianza en la red. Además, puede denegar el servicio tanto a usuarios
+de la red ---pero no todo---; que pueden generar, modificar y retrasar tráfico, y participar en la red
+operando nodos, o controlando nodos de confianza en la red. Además, pueden denegar el servicio tanto a usuarios
 como a nodos.
 
 \subsection{Ataques pasivos}
 
-En esta sección se asume el atacante pasivo, que puede observar el tráfico mínimo necesario
-para realizar cada ataque.
+Describimos los ataques realizados por atacantes pasivos, que pueden observar el tráfico mínimo necesario para realizar cada ataque.
 
-\subsubsection{Ataques de correlación}
+\paragraph{Observación de las opciones}
+
+Tor ofrece al usuario muchas opciones de personalización con el fin de adaptarse al mayor número de necesidades y preferencias. 
+Sin embargo, aquellos usuarios con configuraciones poco frecuentes podrían ser más fácilmente reconocibles entre todos los usuarios de la red, lo que podría ser aprovechado por un atacante para identificarlos.
+
+\paragraph{Ataques de correlación}
 
 Se trata de ataques en los que el atacante puede observar el tráfico que llega a
 un nodo de entrada y a un servicio, y tratará de confirmar si el nodo de entrada y
@@ -318,7 +321,7 @@ tráfico que llega al nodo de entrada y el que llega al servicio. Se puede obser
 la correlación en el \emph{tiempo} en el que transcurre el tráfico y en el \emph{tamaño}
 de dicho tráfico.
 
-\subsubsection{Identificación mediante huellas digitales}
+\paragraph{Identificación mediante huellas digitales}
 
 Un atacante puede compilar una base de datos de «huellas digitales»: patrones de tráfico que caracterizan
 el acceso a ciertos servicios, y confirmar el acceso de un usuario a un servicio buscando en la base
@@ -326,15 +329,17 @@ de datos.
 
 \subsection{Ataques activos}
 
-\subsubsection{Reemplazo de contenidos en protocolos no autenticados}
+Describimos ahora los tipos de ataques más relevantes llevados a cabo por atacantes activos, es decir, aquellos que participan en la red.
+
+\paragraph{Reemplazo de contenidos en protocolos no autentificados}
 
 Si un atacante controla un nodo de salida, y el tráfico que le llega corresponde a una petición
-de un protocolo que no usa autenticación, puede devolver una respuesta arbitraria, que sirva para
+de un protocolo que no usa autentificación, puede devolver una respuesta arbitraria, que sirva para
 identificar un nodo de entrada.
 
-\subsubsection{Administrar nodos hostiles}
+\paragraph{Administrar nodos hostiles}
 
-Si un atacante puede administrar $m$ nodos en una red de $N$ nodos, $\left(\frac{m}{N}\right)^2$ de las veces
+Si un atacante puede administrar $m$ nodos en una red de $N$ nodos, $\left(\sfrac{m}{N}\right)^2$ de las veces
 un usuario elegirá dos nodos hostiles como nodos de entrada y de salida, permitiendo la identificación de la conexión,
 al estar los circuitos formados por tres nodos y conocer cada nodo el que le precede y el que le sucede.
 
