@@ -315,17 +315,17 @@ Sin embargo, aquellos usuarios con configuraciones poco frecuentes podrían ser 
 \paragraph{Ataques de correlación}
 
 Se trata de ataques en los que el atacante puede observar el tráfico que llega a
-un nodo de entrada y a un servicio, y tratará de confirmar si el nodo de entrada y
-el servicio participan en un circuito observando la relación estadística entre el
-tráfico que llega al nodo de entrada y el que llega al servicio. Se puede observar
-la correlación en el \emph{tiempo} en el que transcurre el tráfico y en el \emph{tamaño}
-de dicho tráfico.
+un nodo de entrada y a un servicio, y tratará de confirmar si el nodo de entrada
+y el servicio participan en un circuito observando la relación estadística entre
+el tráfico que llega al nodo de entrada y el que llega al servicio. Se puede
+observar la correlación en el \emph{tiempo} en el que transcurre el tráfico y en
+el \emph{tamaño} de dicho tráfico.
 
 \paragraph{Identificación mediante huellas digitales}
 
-Un atacante puede compilar una base de datos de «huellas digitales»: patrones de tráfico que caracterizan
-el acceso a ciertos servicios, y confirmar el acceso de un usuario a un servicio buscando en la base
-de datos.
+Un atacante puede compilar una base de datos de «huellas digitales»: patrones de
+tráfico que caracterizan el acceso a ciertos servicios, y confirmar el acceso de
+un usuario a un servicio buscando en la base de datos.
 
 \subsection{Ataques activos}
 
@@ -343,7 +343,10 @@ Si un atacante puede administrar $m$ nodos en una red de $N$ nodos, $\left(\sfra
 un usuario elegirá dos nodos hostiles como nodos de entrada y de salida, permitiendo la identificación de la conexión,
 al estar los circuitos formados por tres nodos y conocer cada nodo el que le precede y el que le sucede.
 
+\paragraph{Retrasar tráfico}
 
+Un atacante puede introducir retrasos artificiales en el tráfico de la red para
+apoyar un ataque de correlación como el descrito antes.
 
 %-------------------------------------------------------------------------------
 %	BIBLIOGRAFÍA
