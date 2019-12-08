@@ -290,6 +290,36 @@ La especificación de Tor describe los parámetros que se utilizan por defecto c
 \label{sec:ataques}
 % Dani
 
+\subsection{Modelo de amenazas}
+
+Los modelos de amenazas más empleados son el del atacante \emph{pasivo},
+que puede observar el tráfico que llega a varios nodos de la red; y el del
+atacante \emph{activo}, que además puede participar en la red.
+
+\subsection{Ataques pasivos}
+
+\subsubsection{Ataques de correlación}
+
+Se trata de ataques en los que el atacante puede observar el tráfico que llega a
+un nodo de entrada y a un servicio, y tratará de confirmar si el nodo de entrada y
+el servicio participan en un circuito observando la relación estadística entre el
+tráfico que llega al nodo de entrada y el que llega al servicio. Se puede observar
+la correlación en el \emph{tiempo} en el que transcurre el tráfico y en el \emph{tamaño}
+de dicho tráfico.
+
+\subsubsection{Identificación mediante huellas digitales}
+
+Un atacante puede compilar una base de datos de «huellas digitales»: patrones de tráfico que caracterizan
+el acceso a ciertos servicios, y confirmar el acceso de un usuario a un servicio buscando en la base
+de datos.
+
+\subsection{Ataques activos}
+
+\subsubsection{Reemplazo de contenidos en protocolos no autenticados}
+
+Si un atacante controla un nodo de salida, y el tráfico que le llega corresponde a una petición
+de un protocolo que no usa autenticación, puede devolver una respuesta arbitraria, que sirva para
+identificar un nodo de entrada.
 
 %-------------------------------------------------------------------------------
 %	BIBLIOGRAFÍA
