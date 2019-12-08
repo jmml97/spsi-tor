@@ -292,11 +292,22 @@ La especificación de Tor describe los parámetros que se utilizan por defecto c
 
 \subsection{Modelo de amenazas}
 
-Los modelos de amenazas más empleados son el del atacante \emph{pasivo},
-que puede observar el tráfico que llega a varios nodos de la red; y el del
+Los modelos de amenazas más empleados en redes de anonimato son el del atacante \emph{pasivo},
+que puede observar el tráfico que llega a varios, o todos los nodos de la red; y el del
 atacante \emph{activo}, que además puede participar en la red.
 
+El objetivo de este atacante será romper el anonimato de la red, es decir, determinar las conexiones
+que se producen a través de ella.
+
+El modelo de amenazas de Tor, en concreto, contempla atacantes que pueden observar una parte del tráfico
+de la red --pero no todo--; que puede generar, modificar y retrasar tráfico, y participar en la red
+operando nodos, o controlando nodos de confianza en la red. Además, puede denegar el servicio tanto a usuarios
+como a nodos.
+
 \subsection{Ataques pasivos}
+
+En esta sección se asume el atacante pasivo, que puede observar el tráfico mínimo necesario
+para realizar cada ataque.
 
 \subsubsection{Ataques de correlación}
 
@@ -320,6 +331,14 @@ de datos.
 Si un atacante controla un nodo de salida, y el tráfico que le llega corresponde a una petición
 de un protocolo que no usa autenticación, puede devolver una respuesta arbitraria, que sirva para
 identificar un nodo de entrada.
+
+\subsubsection{Administrar nodos hostiles}
+
+Si un atacante puede administrar $m$ nodos en una red de $N$ nodos, $\left(\frac{m}{N}\right)^2$ de las veces
+un usuario elegirá dos nodos hostiles como nodos de entrada y de salida, permitiendo la identificación de la conexión,
+al estar los circuitos formados por tres nodos y conocer cada nodo el que le precede y el que le sucede.
+
+
 
 %-------------------------------------------------------------------------------
 %	BIBLIOGRAFÍA
