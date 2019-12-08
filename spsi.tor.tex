@@ -182,32 +182,40 @@ Tor es una red superpuesta\footnote{
 Los clientes escogen un camino a través de la red y crean un <<circuito>> en el que cada nodo ---o <<\textit{router} cebolla>>--- en dicho camino conoce su predecesor y sucesor pero no el resto de nodos del circuito.
 
 \section{Estructura de la red Tor}
-La red tor está formada por nodos que se comunican mediante TLS sobre TCP/IP para mantener íntegra y oculta la información entre comunicaciones. Los nodos reciben el tráfico y lo reenvían.
+La red Tor está formada por nodos que se comunican mediante TLS sobre TCP/IP para mantener íntegra y oculta la información entre comunicaciones. Los nodos reciben el tráfico y lo reenvían.
 
 El tráfico pasa por, al menos, tres nodos antes de llegar a su destino. Según la función que cumplen los nodos dentro del circuito podemos diferenciar tres tipos:
 
 \begin{itemize}
 \item Nodos medios. Reciben el tráfico y lo pasan a otro nodo. La presencia de los nodos medios es pública para toda la red Tor y cualquier usuario puede conectarse a ellos.
-\item Nodos salida. Nodo final por el cuál pasa el tráfico antes de alcanzar su destino. Son también de acceso público para toda la red tor. La IP de estos nodos es interpertada por el receptor de información como la fuente del tráfico.
-\item Puentes (\textit{bridges}). Nodos que no son públicos en la red Tor. Utilizados para evitar medidas de censura en países en los que regularmente se bloquean las IP de todos los nodos listados públicamente. Realiza la misma función que los nodos medios.
+\item Nodos salida. Nodo final por el cuál pasa el tráfico antes de alcanzar su destino. Son también de acceso público para toda la red tor. La IP de estos nodos es interpretada por el receptor de información como la fuente del tráfico.
+\item Puentes (\textit{bridges}). Nodos que no son públicos en la red Tor. Utilizados para evitar medidas de censura en países en los que regularmente se bloquean las IP de todos los nodos listados públicamente. Realizan la misma función que los nodos medios.
 \end {itemize}
 
-Existe además un servicio de directorio que publica la lista de nodos disponibles e información sobre dichos nodos. Esta información es accesible a todos los nodos medios y todos los usuarios finales la usan para poder conectarse a la red. Existen una serie de nodos principales llamados autoridades de directorio ---nodos confiables--- y nodos secundarios que actúan como cache y backup de los principales. Para dar fiabilidad al servicio de directorio las entradas son protegidas mediante firmas y solo la información proviniente de autoridades de directorio aprobadas son publicadas en la base de datos. Todo nodo nuevo de la red debe ser previamente aprobado, y no existe un procedimiento automático para aprobarlos. Los administradores del servicio de directorio lo hacen manualmente.
+Existe además un servicio de directorio que publica la lista de nodos disponibles e información sobre ellos. Esta información es accesible a todos los nodos medios y todos los usuarios finales la usan para poder conectarse a la red. Existen una serie de nodos principales llamados \textit{autoridades de directorio} ---nodos confiables--- y nodos secundarios que actúan como \textit{caché} y \textit{backup} de los principales. Para dar fiabilidad al servicio de directorio las entradas son protegidas mediante firmas y solo la información proveniente de autoridades de directorio aprobadas son publicadas en la base de datos. Todo nodo nuevo de la red debe ser previamente aprobado, no existiendo un procedimiento automático para ello. Los administradores del servicio de directorio deben hacerlo manualmente.
 
 \section{Enrutamiento cebolla}
 % Antonio
 
 Para el envío de tráfico a través de la red se utiliza un procedimiento llamado \textit{enrutamiento cebolla}. Esto es debido a cómo se acumulan capas de cifrado sobre el mensaje original. Veamos el procedimiento general y en apartados posteriores desarrollaremos más ampliamente los procedimientos criptográficos utilizados.
 
-El emisor consulta su propia configuración y el directorio para obtener la información sobre como formar el circuito. Se seleecionan los nodos que serán utilizados. Por defecto cada circuito tiene tres nodos medios.
+El emisor consulta su propia configuración y el directorio para obtener la información sobre como formar el circuito. Se seleccionan los nodos que serán utilizados. Por defecto cada circuito tiene tres nodos medios.
 
-Se negocian las claves de cifrado con cada nodo. Se establecen claves simétricas mediante \textit{Diffie-Hellman}. El circuito se construye desde el punto de entrada. Los mensajes para negociar las claves entre el nodo n y el n+1 se realiza retransmitiendo paquetes entre el emisor y retransmitiendo paquetes desde el nodo 1 hasta el n, y de ahí al nodo n+1. En cada paso los mensajes son cifrados con las claves previamente negociadas. Una vez establecidas las claves se puede enviar tráfico.
+Se negocian las claves de cifrado con cada nodo. Se establecen claves simétricas mediante \textit{Diffie-Hellman}. El circuito se construye desde el punto de entrada. Los mensajes para negociar las claves entre el nodo \(n\) y el \(n+1\) se realiza retransmitiendo paquetes entre el emisor y retransmitiendo paquetes desde el nodo \(1\) hasta el \(n\), y de ahí al nodo \(n+1\). En cada paso los mensajes son cifrados con las claves previamente negociadas. Una vez establecidas las claves se puede enviar tráfico.
 
-%OR4
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{OR4.png}
+  \caption{Representación visual del enrutamiento cebolla \parencite{wikipedia:hantwister_svg_2008}.}
+  \label{fig:or4}
+\end{figure}
 
-Los paquetes se cifran con las claves recibidas en orden inverso: primero se cifra con la clave del último nodo, luego con la del penúltimo, y así hasta llegar al primer nodo. Se envía el paquete resultante a través del circuito y a su paso por cada nodo se elimina la capa de cifrado correspondiente a dicho nodo.
+Los paquetes se cifran con las claves recibidas en orden inverso: primero se cifra con la clave del último nodo, luego con la del penúltimo, y así hasta llegar al primero. Se envía el paquete resultante a través del circuito y a su paso por cada nodo se elimina la capa de cifrado correspondiente a dicho nodo. En la figura \ref{fig:or5} puede verse un esquema de un ejemplo de comunicación.
 
-%OR5
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{OR5.png}
+  \caption{Diagrama representando un ejemplo de comunicación entre una usuaria, Alice, y una página web, pasando por dos nodos \parencite{dingledine_tor:_2004}.}
+  \label{fig:or5}
+\end{figure}
 
 Puesto que solo el primer nodo conoce desde dónde proviene la información y sólo el nodo final conoce cuál es la información, no es posible saber quién la envía y qué se envía.
 
@@ -216,16 +224,16 @@ Puesto que solo el primer nodo conoce desde dónde proviene la información y s�
 
 Las conexiones entre dos repetidores en un circuito Tor, o entre el cliente y un repetidor utilizan el protocolo TLS/SSLv3 para la autentificación y el cifrado de los enlaces.
 Se conoce como \textit{suite de cifrado} al conjunto de algoritmos utilizados al establecer una comunicación mediante TLS.
-Dicha \textit{suite} suele incluir un algoritmo de intercambio de intercambio de claves, un algoritmo de cifrado en bloque y un algoritmo de código de autenticación de mensaje.
+Dicha \textit{suite} suele incluir un algoritmo de intercambio de intercambio de claves, un algoritmo de cifrado en bloque y un algoritmo de código de autentificación de mensaje.
 La especificación de Tor \parencite{dingledine_tor_2019} permite que el usuario elija una \textit{suite} de cifrado de entre una lista predefinida, aunque todas las implementaciones deben soportar como mínimo \texttt{TLS\_DHE\_RSA\_WITH\_AES\_128\_CBC\_SHA}.
 
 Sin entrar en demasiados detalles, el protocolo TLS tiene dos fases: una primera en la que ambas partes establecen la conexión y se ponen de acuerdo en una clave compartida con la que cifrar la información (mediante el uso del algoritmo de intercambio de claves), y una segunda en la que proceden al intercambio de información en sí, utilizando para ello el algoritmo de cifrado en bloque \parencite{ibm_overview_2019}.
 
 Para establecer la conexión TLS entre los nodos del circuito creado por el usuario se utiliza una implementación del protocolo de Diffie-Hellman.
-Originalmente Tor utilizaba un protocolo de autentificación ---denominado posteriormente como TAP, \textit{Tor Authentication Protocol}--- que implementaba Diffie-Hellman sobre \(Z_p\), junto a RSA para calcular un conjunto de claves que ambos nodos comparten \parencite{dingledine_tor:_2004}.
+Originalmente Tor utilizaba un protocolo de autentificación ---denominado posteriormente como TAP, \textit{Tor Authentication Protocol}--- que implementaba Diffie-Hellman sobre el grupo finito \(Z_p\), junto a RSA para calcular un conjunto de claves que ambos nodos comparten \parencite{dingledine_tor:_2004}.
 
 Análisis posteriores \parencite{hutchison_security_2006} llegaron a la conclusión de que TAP tenía deficiencias, lo que condujo a la creación de un nuevo protocolo denominado \textit{ntor} y que se introdujo en la versión \texttt{0.2.4.8-alpha} de Tor.
-Este nuevo protocolo utiliza ECDH, que implementa el protocolo  de Diffie-Hellman para un grupo curvas elípticas, en lugar de un grupo \(Z_p\). Tor en concreto utiliza el grupo Curve25519 \parencite{yung_curve25519:_2006}, que ofrece tamaños de clave de 128 bits.
+Este nuevo protocolo utiliza ECDH (\textit{Elliptic Curve Diffie-Hellman}), que implementa el protocolo de Diffie-Hellman para un grupo curvas elípticas, en lugar de un grupo \(Z_p\). Tor en concreto utiliza el grupo Curve25519 \parencite{yung_curve25519:_2006}, que ofrece tamaños de clave de 128 bits.
 
 Finalmente, una vez establecida la conexión TLS, se utiliza AES con claves de 128 bits para el cifrado de la información intercambiada entre dos nodos.
 
