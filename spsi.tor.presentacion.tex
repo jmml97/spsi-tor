@@ -62,15 +62,17 @@
 
 %%% AJUSTES DE BEAMER
 
-\usefonttheme{professionalfonts}
+%\usefonttheme{professionalfonts}
 
 \setbeamertemplate{navigation symbols}{}
 
 \setbeamerfont{title}{series=\bfseries}
 
-\setbeamertemplate{frametitle}{\color{foreground}\vspace*{1cm}\bfseries\insertframetitle\par\vskip-6pt}
-\setbeamerfont{framesubtitle}{size=\normalfont}
-\setbeamercolor{framesubtitle}{fg=comments}
+%\setbeamertemplate{frametitle}{\color{foreground}\vspace*{1cm}\bfseries\insertframetitle\par\vskip-6pt}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{frametitle}{fg=foreground}
+\setbeamerfont{framesubtitle}{size=\normalfont\small}
+\setbeamercolor{framesubtitle}{fg=foreground}
 
 \setbeamercolor{background canvas}{bg=background}
 
@@ -109,6 +111,47 @@
 \maketitle
 
 \begin{frame}{¿Qué es Tor?}
+  
+\end{frame}
+
+\section{Algoritmos de cifrado de Tor}
+
+\begin{frame}{Algoritmos de cifrado de Tor}{}
+
+  \begin{itemize}
+    \item Las conexiones usan TLS/SSLv3
+
+    \item Permite elegir suite de cifrado
+  
+    \item TLS tiene dos fases \begin{enumerate}
+      \item Establecimiento de la comunicación: determinar una clave compartida
+      \item Intercambio de información
+    \end{enumerate}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Algoritmos de cifrado de Tor}{Establecimiento de la conexión}
+
+  \begin{itemize}
+    \item Inicialmente se usaba un protocolo llamado TAP. \begin{itemize}
+      \item Diffie-Hellman clásico sobre un cuerpo finito de orden \[
+        p = 2^{1024} - 2^{960} - 1 + 2^{64} \cdot \left\lfloor (2^{894} \pi) + 129093 \right\rfloor.
+      \]
+      \item Se demostró que tenía deficiencias.
+    \end{itemize}
+    \item Se creó entonces \textit{ntor}, que usa ECDH. \begin{itemize}
+      \item Diffie-Hellman sobre el grupo generado por la curva \textit{Curve25519}, de ecuación \[y^{2}=x^{3}+486662x^{2}+x\] sobre el cuerpo finito de orden el primo \(2^{255}-19\).
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Algoritmos de cifrado de Tor}{Intercambio de datos}
+
+  \begin{itemize}
+    \item Una vez establecida la conexión y determinada la clave, se usa AES.
+  \end{itemize}
   
 \end{frame}
 
