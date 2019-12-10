@@ -12,7 +12,9 @@ PROJNAME=spsi.tor
 
 # The first rule in a Makefile is the one executed by default ("make"). It
 # should always be the "all" rule, so that "make" and "make all" are identical.
-all: $(PROJNAME).pdf
+all: $(PROJNAME).pdf spsi.tor.presentacion.pdf
+
+presentacion: spsi.tor.presentacion.pdf
 
 # MAIN LATEXMK RULE
 
@@ -24,6 +26,9 @@ all: $(PROJNAME).pdf
 # missing file reference and interactively asking you for an alternative.
 
 $(PROJNAME).pdf: $(PROJNAME).tex
+	latexmk -lualatex -interaction=nonstopmode -use-make $<
+
+spsi.tor.presentacion.pdf: spsi.tor.presentacion.tex
 	latexmk -lualatex -interaction=nonstopmode -use-make $<
 
 cleanall:
