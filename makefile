@@ -29,7 +29,7 @@ $(PROJNAME).pdf: $(PROJNAME).tex
 	latexmk -lualatex -interaction=nonstopmode -use-make $<
 
 spsi.tor.presentacion.pdf: spsi.tor.presentacion.tex
-	latexmk -lualatex -interaction=nonstopmode -use-make $<
+	latexmk -lualatex -interaction=nonstopmode $<
 
 cleanall:
 	latexmk -C
