@@ -124,8 +124,8 @@
 \title{La red Tor}
 \subtitle{Seguridad y Protección de Sistemas Informáticos}
 \author{
-  José María Martín Luque \texorpdfstring{\\}{} 
-  Antonio Martín Ruiz \texorpdfstring{\\}{} 
+  José María Martín Luque \texorpdfstring{\\}{}
+  Antonio Martín Ruiz \texorpdfstring{\\}{}
   Daniel Pozo Escalona
 }
 
@@ -134,7 +134,44 @@
 \maketitle
 
 \begin{frame}{¿Qué es Tor?}
-  
+
+\end{frame}
+
+\section{Algoritmos de cifrado de Tor}
+
+\begin{frame}{Estructura de la red Tor}
+
+Formada por nodos que se comunican mediante TCP/IP
+
+  \begin{enumerate}
+
+    \item Nodos medios
+
+    \item Nodos salida
+
+    \item Puentes
+
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Enrutamiento cebolla}
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{OR5.png}
+  \caption{Diagrama representando un ejemplo de comunicación entre una usuaria (Alice) y una página web, pasando por dos nodos intermedios.}
+  \label{fig:or5}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Enrutamiento cebolla}
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{OR4.png}
+  \label{fig:or4}
+\end{figure}
+
 \end{frame}
 
 \section{Algoritmos de cifrado de Tor}
@@ -145,13 +182,13 @@
     \item Las conexiones usan TLS/SSLv3
 
     \item Permite elegir suite de cifrado
-  
+
     \item TLS tiene dos fases \begin{enumerate}
       \item Establecimiento de la comunicación: determinar una clave compartida
       \item Intercambio de información
     \end{enumerate}
   \end{itemize}
-  
+
 \end{frame}
 
 \begin{frame}{Algoritmos de cifrado de Tor}{Establecimiento de la conexión}
@@ -167,7 +204,7 @@
       \item Diffie-Hellman sobre el grupo generado por la curva \textit{Curve25519}, de ecuación \[y^{2}=x^{3}+486662x^{2}+x\] sobre el cuerpo finito de orden el primo \(2^{255}-19\).
     \end{itemize}
   \end{itemize}
-  
+
 \end{frame}
 
 \begin{frame}{Algoritmos de cifrado de Tor}{Intercambio de datos}
@@ -175,8 +212,7 @@
   \begin{itemize}
     \item Una vez establecida la conexión y determinada la clave, se usa AES.
   \end{itemize}
-  
+
 \end{frame}
 
 \end{document}
-
