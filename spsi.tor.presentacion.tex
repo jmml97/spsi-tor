@@ -61,6 +61,15 @@
   tabsize=2
 }
 
+% Bibliografía
+
+\usepackage[sorting=none, style=apa, isbn=true]{biblatex}
+\DefineBibliographyStrings{spanish}{
+  urlseen = {Consultado},
+  retrieved = {Consultado},
+}
+\addbibresource{bibliografia.bib}
+
 %%% AJUSTES DE BEAMER
 
 %\usefonttheme{professionalfonts}
@@ -135,6 +144,11 @@
 
 \begin{frame}{¿Qué es Tor?}
 
+  \begin{itemize}
+    \item Red superpuesta distribuida para anonimizar aplicaciones basadas en TCP.
+    \item Los clientes escogen un camino a través de la red creando un <<circuito>>.
+  \end{itemize}
+
 \end{frame}
 
 \section{Algoritmos de cifrado de Tor}
@@ -195,13 +209,13 @@ Formada por nodos que se comunican mediante TCP/IP
 
   \begin{itemize}
     \item Inicialmente se usaba un protocolo llamado TAP. \begin{itemize}
-      \item Diffie-Hellman clásico sobre un cuerpo finito de orden \[
+      \item Diffie-Hellman clásico sobre un cuerpo finito de orden el primo \parencite{carrel_internet_1998} \[
         p = 2^{1024} - 2^{960} - 1 + 2^{64} \cdot \left\lfloor (2^{894} \pi) + 129093 \right\rfloor.
       \]
-      \item Se demostró que tenía deficiencias.
+      \item Se demostró que tenía deficiencias \parencite{hutchison_security_2006}.
     \end{itemize}
     \item Se creó entonces \textit{ntor}, que usa ECDH. \begin{itemize}
-      \item Diffie-Hellman sobre el grupo generado por la curva \textit{Curve25519}, de ecuación \[y^{2}=x^{3}+486662x^{2}+x\] sobre el cuerpo finito de orden el primo \(2^{255}-19\).
+      \item Diffie-Hellman sobre el grupo generado por los puntos de la curva \textit{Curve25519} \parencite{yung_curve25519:_2006}, de ecuación \[y^{2}=x^{3}+486662x^{2}+x\] sobre el cuerpo finito de orden el primo \(2^{255}-19\).
     \end{itemize}
   \end{itemize}
 
@@ -211,8 +225,13 @@ Formada por nodos que se comunican mediante TCP/IP
 
   \begin{itemize}
     \item Una vez establecida la conexión y determinada la clave, se usa AES.
+    \item Claves de 128 bits.
   \end{itemize}
 
+\end{frame}
+
+\begin{frame}[t,allowframebreaks]{Referencias}
+  \printbibliography[heading=none]
 \end{frame}
 
 \end{document}
