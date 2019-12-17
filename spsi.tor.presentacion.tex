@@ -145,7 +145,10 @@
 \begin{frame}{¿Qué es Tor?}
 
   \begin{itemize}
-    \item Red superpuesta distribuida para anonimizar aplicaciones basadas en TCP.
+    \item Es una red \begin{itemize}
+      \item superpuesta (utiliza infraestructura ya existente)
+      \item distribuida (no hay una autoridad central)
+    \end{itemize} usada para anonimizar aplicaciones basadas en TCP.
     \item Los clientes escogen un camino a través de la red creando un <<circuito>>.
   \end{itemize}
 
@@ -236,8 +239,8 @@ Formada por nodos que se comunican mediante TCP/IP
 
 \begin{frame}{Ataques a la red Tor}{Modelo de amenazas}
   \begin{itemize}
-  \item Objetivo del atacante: romper el anonimato
-  \item Atacantes \emph{pasivo} y \emph{activo}
+  \item Objetivo del atacante: romper el anonimato.
+  \item Atacantes \emph{pasivo} y \emph{activo}.
   \end{itemize}
 \end{frame}
 
@@ -282,7 +285,7 @@ Formada por nodos que se comunican mediante TCP/IP
 
 \begin{frame}{Ataques activos}{Administrar nodos hostiles}
  Si un atacante puede administrar $m$ nodos en una red de $N$ nodos,
- $\left(\sfrac{m}{N}\right)^2$ de las veces un usuario elegirá dos nodos
+ $\left(m/N\right)^2$ de las veces un usuario elegirá dos nodos
  hostiles como nodos de entrada y de salida.
 \end{frame}
 
