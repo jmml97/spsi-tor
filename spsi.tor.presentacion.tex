@@ -256,11 +256,34 @@ Formada por nodos que se comunican mediante TCP/IP
       \begin{itemize}
       \item generar tráfico,
       \item modificar y retrasar tráfico,
-      \item operar nodos de la red, y
-      \item controlar nodos de confianza de la red.
+      \item operar nodos de la red,
+      \item controlar nodos de confianza de la red, y
+      \item denegar el servicio a nodos de la red.
       \end{itemize}
     \end{block}
   \end{columns}
+\end{frame}
+
+\begin{frame}{Ataques pasivos}{Ataques de correlación} 
+  Observar correlación en el tiempo y el tamaño del tráfico que llega a nodos de entrada
+  y servicios.
+\end{frame}
+
+\begin{frame}{Ataques pasivos}{Identificación mediante «huellas digitales»}
+  Compilar una base de datos de patrones de acceso a servicios y confirmar el acceso de
+  un usuario a un servicio buscando en la base de datos.
+\end{frame}
+
+\begin{frame}{Ataques activos}{Reemplazo de contenidos en protocolos no autenticados}
+  El atacante controla un nodo de salida y sustituye la respuesta de un servicio
+  por una arbitraria, diseñada para para identificar al usuario que emite la
+  petición.
+\end{frame}
+
+\begin{frame}{Ataques activos}{Administrar nodos hostiles}
+ Si un atacante puede administrar $m$ nodos en una red de $N$ nodos,
+ $\left(\sfrac{m}{N}\right)^2$ de las veces un usuario elegirá dos nodos
+ hostiles como nodos de entrada y de salida.
 \end{frame}
 
 \begin{frame}[t,allowframebreaks]{Referencias}
